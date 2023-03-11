@@ -7,7 +7,7 @@ const initialState: InitialState = {
     games: [],
 };
 
-const teamsReducer = (actions: TeamActions, state = initialState) => {
+const teamsReducer = (state: InitialState = initialState, actions: TeamActions = {type: ""}) => {
     switch (actions.type) {
         case SET_TEAMS:
             return {
