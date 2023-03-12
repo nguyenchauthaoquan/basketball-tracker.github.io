@@ -3,7 +3,7 @@ import React from "react";
 
 const GamesBoard = ({games, open} : GameBoardProps) => {
     console.log(games);
-    
+
    return (
        <>
            {
