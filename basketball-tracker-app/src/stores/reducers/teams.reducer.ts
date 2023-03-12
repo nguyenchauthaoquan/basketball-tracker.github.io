@@ -1,5 +1,5 @@
 import {InitialState} from "../../common/interfaces/InitialState";
-import {SET_GAMES, SET_TEAMS} from "../../constants/constants";
+import {SET_TEAMS} from "../../constants/constants";
 import {TeamActions} from "../../common/types/actions";
 
 const initialState: InitialState = {
@@ -13,10 +13,6 @@ const teamsReducer = (state: InitialState = initialState, actions: TeamActions =
             return {
                 ...state,
                 teams: actions.payload
-            }
-        case SET_GAMES:
-            return {
-                ...state
             }
         default:
             return state

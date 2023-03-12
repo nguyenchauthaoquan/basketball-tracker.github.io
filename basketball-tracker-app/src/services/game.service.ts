@@ -8,6 +8,7 @@ export const getGamesAsync = async (url: string, teamIds: string[]): Promise<Gam
     let totalDays: number = 1;
     let startDate: string;
     let endDate: Moment = moment();
+    endDate = endDate.subtract(1, "day");
 
     while (totalDays > 0 && totalDays <= 12) {
         startDate = endDate.format("YYYY-MM-DD");
@@ -16,14 +17,12 @@ export const getGamesAsync = async (url: string, teamIds: string[]): Promise<Gam
         totalDays++;
     }
 
-    console.log(dates);
-
     await axios.get(url, {
         params: {
             team_ids: teamIds,
             dates,
         }
-    }).then(response => games = response.data);
+    }).then(response => games = response.data.data);
 
     return games;
 }
