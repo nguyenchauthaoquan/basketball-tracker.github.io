@@ -10,13 +10,14 @@ import GamesBoard from "./GamesBoard";
 const _ = require("lodash");
 
 const TeamsSelect:FC<TeamSelectProps> = ({teams, games, getTeams, getGames}: TeamSelectProps) => {
-    const teamsList  = _.map(teams.teams, (team: Team) => {
+
+    const teamsList: {value: number, label: string}[]  = _.map(teams.teams, (team: Team) => {
         return {
             value: team.id,
             label: team.full_name
         }
     });
-
+    const [teamId, setTeamId] = useState<number>(0);
     const [teamIds, setTeamIds] = useState<number[]>([]);
     const [openGamesBoard, setOpenGamesBoard] = useState<boolean>(false);
 
@@ -25,7 +26,7 @@ const TeamsSelect:FC<TeamSelectProps> = ({teams, games, getTeams, getGames}: Tea
     }, [getTeams])
 
     const onSelectChange = (value : number) => {
-        setTeamIds(_.uniq([value, ...teamIds]));
+        setTeamId(value)
     }
 
     return (
@@ -41,13 +42,14 @@ const TeamsSelect:FC<TeamSelectProps> = ({teams, games, getTeams, getGames}: Tea
                 <Col span={12}>
                     <Button color="primary" onClick={() => {
                         setOpenGamesBoard(true);
-
+                        teamIds.push(teamId)
+                        setTeamIds(teamIds)
                         getGames(teamIds)
                     }
                     }>Track Team</Button>
                 </Col>
             </Row>
-            <GamesBoard games={games.games} open={openGamesBoard} />
+            <GamesBoard games={games.games} open={openGamesBoard}  teamIds={teamIds} getGames={getGames} />
         </>
     )
 }

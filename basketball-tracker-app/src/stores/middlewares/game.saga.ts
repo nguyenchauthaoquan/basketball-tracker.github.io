@@ -9,7 +9,6 @@ function* getGames(ids: {type: string, payload: number[]}) {
     const url = "/games";
 
     let games: Game[] = yield effects.call(getGamesAsync, url, ids.payload);
-    console.log(games)
 
     yield effects.put(SetGamesAction(games));
 }
