@@ -7,13 +7,13 @@ import routes from "./common/configurations/routes";
 function App() {
   return (
     <div className="App">
+      <Routes>
         {
-            routes.map((route: RouteItem) =>
-                <Routes key={route.path}>
-                  <Route index path={route.path} element={route.element} />
-                </Routes>
-            )
+          routes.map((route: RouteItem) =>
+              <Route key={route.path} index={route.index} path={route.path} element={route.element} />
+          )
         }
+      </Routes>
     </div>
   );
 }
